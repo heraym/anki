@@ -1,0 +1,27 @@
+<div><div id="tline"
+  aria-label="Single Series Timeline Demo"
+  data-bind="ojComponent: {
+  component: 'ojTimeline',
+  minorAxis: {
+  scale: 'weeks',
+    zoomOrder: ['months', 'weeks', 'days']
+  },
+  majorAxis: {
+    scale: 'quarters'
+  },
+  start: new Date('Jan 1, 2010').toISOString(),
+  end: new Date('Dec 31, 2010').toISOString(),
+  selectionMode: 'single',
+  referenceObjects: [{value: new Date('Feb 1, 2010').toISOString()}],
+  selection: ['e2'],
+  series: [{ 
+    id: 's1',
+    emptyText: 'No Data.',
+    items: series,
+    label: 'Eventos Oracle'
+  }],
+  overview: {
+    rendered: 'off'
+  }	                                        
+}" style="width:100%;height: 350px"></div>
+</div>            

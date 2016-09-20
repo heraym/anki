@@ -1,0 +1,18 @@
+ <div id='gauge-container'>
+    <div id="gauge1" title="Value: 50<br>Max: 100"
+       data-bind="ojComponent: {
+         component: 'ojDialGauge',
+         value: gaugeValue,
+         readOnly: false,
+         animationOnDisplay: 'auto',
+         animationOnDataChange: 'auto',
+         indicator: 'needleAlta',
+		 optionChange: updateTitle,
+         background: 'circleAlta',
+         metricLabel: {rendered: 'on',
+         style: 'font-size: 18px; font-weight: bold; font-family: Georgia, Times New Roman, serif;'}
+        }"
+        style="width:250px;height:250px">
+    </div>
+ </div>
+             

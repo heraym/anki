@@ -1,0 +1,184 @@
+<div class="oj-flex oj-flex-items-pad" >
+<div class="oj-panel oj-panel-alt1" style="height: 150px; width: 1200px;margin: 5px 0px 10px 0px;">
+               
+<table><tr><td>         <div class="oj-sm-4">
+			      <img class="demo-circular demo-employee-photo" alt="Skull" src="css/images/cars/skull-car.jpg"/>                       </div>
+                            </td><td style="width: 400px"><div class="oj-sm-8">
+                              <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Skull - Juan Perez</h2>                               
+                                <div class="demo-employee-title"> Vuelta 1</div>
+                                <div class="demo-employee-dept"> Tiempo de vuelta : 3m 10 s</div>
+                            </div>
+                        </div>
+</td><td>                            
+<div id='gauge-container' class="oj-sm-4 oj-flex-item">
+       <div id="gauge1" title="Value: 50<br>Max: 100"
+       data-bind="ojComponent: {
+         component: 'ojDialGauge',
+         value: gaugeValue1,
+         readOnly: false,
+         animationOnDisplay: 'auto',
+         animationOnDataChange: 'auto',
+         indicator: 'needleAlta',
+		 optionChange: updateTitle,
+         background: 'circleAlta',
+         metricLabel: {rendered: 'on',
+         style: 'font-size: 18px; font-weight: bold; font-family: Georgia, Times New Roman, serif;'}
+        }"
+        style="width:100px;height:100px">
+    </div>
+ </div>
+</div> 
+</td><td><div id='sparkChart-container'>
+   <div style="float:left;line-height:60px;width:150px;font-weight:bold;padding-left:10px">
+        Velocidad 
+   </div>
+   <div title="Historial Carrera" data-bind="ojComponent: {
+            component: 'ojSparkChart', 
+            type: 'lineWithArea', 
+            color: lineWithAreaColor,
+            items: sparkValues1,
+            lineType: 'curved'
+        }" 
+         style="max-width:560px;width:100%;height:80px;float:left;">
+   </div>
+    <br style="clear:left;"/>
+</div></td></tr></table></div>
+<!-- Ground Shock -->    
+<div class="oj-panel oj-panel-alt1" style="height: 150px; width: 1200px;margin: 5px 0px 10px 0px;">
+               
+<table><tr><td>         <div class="oj-sm-4">
+			      <img class="demo-circular demo-employee-photo" alt="Skull" src="css/images/cars/groundshock_car.jpg"/>                       </div>
+                            </td><td style="width: 400px"><div class="oj-sm-8">
+                              <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Ground Shock - Juan Perez</h2>                               
+                                <div class="demo-employee-title"> Vuelta 1</div>
+                                <div class="demo-employee-dept"> Tiempo de vuelta : 3m 10 s</div>
+                            </div>
+                        </div>
+</td><td>                            
+<div id='gauge-container' class="oj-sm-4 oj-flex-item">
+       <div id="gauge2" title="Value: 50<br>Max: 100"
+       data-bind="ojComponent: {
+         component: 'ojDialGauge',
+         value: gaugeValue2,
+         readOnly: false,
+         animationOnDisplay: 'auto',
+         animationOnDataChange: 'auto',
+         indicator: 'needleAlta',
+		 optionChange: updateTitle,
+         background: 'circleAlta',
+         metricLabel: {rendered: 'on',
+         style: 'font-size: 18px; font-weight: bold; font-family: Georgia, Times New Roman, serif;'}
+        }"
+        style="width:100px;height:100px">
+    </div>
+ </div>
+</div> 
+</td><td><div id='sparkChart-container'>
+   <div style="float:left;line-height:60px;width:150px;font-weight:bold;padding-left:10px">
+        Velocidad 
+   </div>
+   <div title="Historial Carrera" data-bind="ojComponent: {
+            component: 'ojSparkChart', 
+            type: 'lineWithArea', 
+            color: lineWithAreaColor,
+            items: sparkValues2,
+            lineType: 'curved'
+        }" 
+         style="max-width:560px;width:100%;height:80px;float:left;">
+   </div>
+    <br style="clear:left;"/>
+</div></td></tr></table></div>
+
+
+</div>
+<!-- Guardian -->
+<div class="oj-panel oj-panel-alt1" style="height: 150px; width: 1200px;margin: 5px 0px 10px 0px;">
+               
+<table><tr><td>         <div class="oj-sm-4">
+			      <img class="demo-circular demo-employee-photo" alt="Guardian" src="css/images/cars/guardian-car.jpg"/>                       </div>
+                            </td><td style="width: 400px"><div class="oj-sm-8">
+                              <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Guardian - Juan Perez</h2>                               
+                                <div class="demo-employee-title"> Vuelta 1</div>
+                                <div class="demo-employee-dept"> Tiempo de vuelta : 3m 10 s</div>
+                            </div>
+                        </div>
+</td><td>                            
+<div id='gauge-container' class="oj-sm-4 oj-flex-item">
+       <div id="gauge3" title="Value: 50<br>Max: 100"
+       data-bind="ojComponent: {
+         component: 'ojDialGauge',
+         value: gaugeValue3,
+         readOnly: false,
+         animationOnDisplay: 'auto',
+         animationOnDataChange: 'auto',
+         indicator: 'needleAlta',
+		 optionChange: updateTitle,
+         background: 'circleAlta',
+         metricLabel: {rendered: 'on',
+         style: 'font-size: 18px; font-weight: bold; font-family: Georgia, Times New Roman, serif;'}
+        }"
+        style="width:100px;height:100px">
+    </div>
+ </div>
+</div> 
+</td><td><div id='sparkChart-container'>
+   <div style="float:left;line-height:60px;width:150px;font-weight:bold;padding-left:10px">
+        Velocidad 
+   </div>
+   <div title="Historial Carrera" data-bind="ojComponent: {
+            component: 'ojSparkChart', 
+            type: 'lineWithArea', 
+            color: lineWithAreaColor,
+            items: sparkValues3,
+            lineType: 'curved'
+        }" 
+         style="max-width:560px;width:100%;height:80px;float:left;">
+   </div>
+    <br style="clear:left;"/>
+</div></td></tr></table></div>            
+
+<!-- Thermo -->
+<div class="oj-panel oj-panel-alt1" style="height: 150px; width: 1200px;margin: 5px 0px 10px 0px;">
+               
+<table><tr><td>         <div class="oj-sm-4">
+			      <img class="demo-circular demo-employee-photo" alt="Skull" src="css/images/cars/thermo-car.jpg"/>                       </div>
+                            </td><td style="width: 400px"><div class="oj-sm-8">
+                              <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Thermo - Juan Perez</h2>                               
+                                <div class="demo-employee-title"> Vuelta 1</div>
+                                <div class="demo-employee-dept"> Tiempo de vuelta : 3m 10 s</div>
+                            </div>
+                        </div>
+</td><td>                            
+<div id='gauge-container' class="oj-sm-4 oj-flex-item">
+       <div id="gauge1" title="Value: 50<br>Max: 100"
+       data-bind="ojComponent: {
+         component: 'ojDialGauge',
+         value: gaugeValue4,
+         readOnly: false,
+         animationOnDisplay: 'auto',
+         animationOnDataChange: 'auto',
+         indicator: 'needleAlta',
+		 optionChange: updateTitle,
+         background: 'circleAlta',
+         metricLabel: {rendered: 'on',
+         style: 'font-size: 18px; font-weight: bold; font-family: Georgia, Times New Roman, serif;'}
+        }"
+        style="width:100px;height:100px">
+    </div>
+ </div>
+</div> 
+</td><td><div id='sparkChart-container'>
+   <div style="float:left;line-height:60px;width:150px;font-weight:bold;padding-left:10px">
+        Velocidad 
+   </div>
+   <div title="Historial Carrera" data-bind="ojComponent: {
+            component: 'ojSparkChart', 
+            type: 'lineWithArea', 
+            color: lineWithAreaColor,
+            items: sparkValues4,
+            lineType: 'curved'
+        }" 
+         style="max-width:560px;width:100%;height:80px;float:left;">
+   </div>
+    <br style="clear:left;"/>
+</div></td></tr></table></div>

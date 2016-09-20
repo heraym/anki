@@ -1,0 +1,11 @@
+https://www.microsoft.com/es-ar/download/confirmation.aspx?id=34673
+https://github.com/oracle/node-oracledb/blob/master/INSTALL.md#instwin
+https://strongloop.com/strongblog/official-node-js-connector-oracle-database/
+
+
+- Historia de tiempo de carreras
+- base de datos de corredores
+- HVAC
+
+para que ande la base de datos hay que:
+set PATH=C:\oracle\instantclient;%PATH%
