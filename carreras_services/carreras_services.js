@@ -1,15 +1,9 @@
 var express = require("express"),
     http = require("http"),
     app = express(),
+    db = require("./carreras_db"),
     cors = require("cors");
 
-
-// Datos base de datos
-var oracledb = require("oracledb");
-
-usuarioDB = "carreras";
-passwordDB = "carreras";
-connectStringDB = "localhost/XE";
 
 carreras = [];
  
@@ -647,9 +641,20 @@ app.get('/carreras/actual', function(req,res) {
 });
 
 app.get('/carreras/corredores', function(req,res) { 
- console.log('consulta corredores:');
+ db.obtenerCorredores(function(corredores) {
+        res.writeHead(200, {"Content-Type": "application/json"}); 
+        res.end(JSON.stringify(corredores));  
+ });
+           
+ 
+});
+
+app.post('/carreras/corredores/nuevo', function(req,res) { 
+ console.log('nuevo corredor');
+ db.nuevoCorredor(req.query.apellido, req.query.nombre, req.query.puesto, req.query.empresa, req.query.email, req.query.telefono, req.query.twitter);
+ var output = "{ resultado: 'OK'}";
  res.writeHead(200, {"Content-Type": "application/json"}); 
- res.end(JSON.stringify(employees));  
+ res.end(JSON.stringify(output));  
 });
 
 app.post('/carreras/actual', function(req,res) {
@@ -660,52 +665,27 @@ app.post('/carreras/actual', function(req,res) {
 res.end();
 });
 
-app.get('/carreras/db', function(req,res) {
-     oracledb.getConnection(
-      {
-       user          : usuarioDB,
-       password      : passwordDB,
-       connectString : connectStringDB
-      },
-     function(err, connection)
-      {
-       if (err) { console.error(err); return; }
-
-       connection.execute(
-      "SELECT id, nombre,descripcion,fecha,corredor1,corredor2,corredor3,corredor4,primero,segundo,tercero,cuarto,tiempo "
-    + "FROM carreras ",
-      function(err, result)
-      {
-        if (err) { console.error(err.message); return; }
-        var i = 0;
-       
-       this.carreras = [];
-       
-       
-       for (i=0;i<result.rows.length;i++) {
-         var carrera = {id:0,nombre:"",descripcion:"",fecha:"",corredor1:0,corredor2:0,corredor3:0,corredor4:0,primero:0,segundo:0,tercero:0,cuarto:0,tiempo:""};
-   
-         carrera.id = result.rows[i][0];
-         carrera.nombre = result.rows[i][1];
-         carrera.descripcion = result.rows[i][2];
-         carrera.fecha = result.rows[i][3];
-         carrera.corredor1 = result.rows[i][4];
-         carrera.corredor2 = result.rows[i][5];
-         carrera.corredor3 = result.rows[i][6];
-         carrera.corredor4 = result.rows[i][7];
-         carrera.primero = result.rows[i][8];
-         carrera.segundo = result.rows[i][9];         
-	 carrera.tercero = result.rows[i][10];
-         carrera.cuarto = result.rows[i][11];
-         carrera.tiempo = result.rows[i][12];
-         this.carreras.push(carrera);
-       }
-      res.writeHead(200, {"Content-Type": "application/json"}); 
-      res.end(JSON.stringify(this.carreras)); 
+app.get('/carreras', function(req,res) {
+        
+      db.obtenerCarreras(function(carreras) {
+         console.log(carreras); });
            
-      });
-     });
+
+      res.writeHead(200, {"Content-Type": "application/json"}); 
+      res.end(JSON.stringify("OK"));      
+      
     });
+
+app.post('/carreras/iniciar', function(req,res) {
+
+db.iniciarCarrera(req.query.nombre, req.query.lugar, req.query.corredor1, req.query.corredor2, req.query.corredor3, req.query.corredor4);
+var output = "{ resultado: 'OK'}";
+     res.writeHead(200, {"Content-Type": "application/json"}); 
+    res.end(JSON.stringify(output)); 
+
+});
+
+
 
 app.listen(4000);
 console.log("Node server running on http:localhost:4000");

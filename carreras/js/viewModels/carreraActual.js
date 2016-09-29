@@ -9,7 +9,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojgauge', 'ojs/ojchart'],
                self.gaugeValue3 = ko.observable(50);
 	       self.gaugeValue4 = ko.observable(50);
  
-               window.setInterval(checkIndicadores, 2000);
+               window.setInterval(checkIndicadores, 5000);
 
 	       function createRequest() {
 		  var result = null;
@@ -37,36 +37,39 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojgauge', 'ojs/ojchart'],
  		 if (req.readyState != 4) return; // Not there yet
  		 if (req.status != 200) {
  		   // Handle request failure here...
+                    
  		   return;
 	         }
 		  // Request successful, read the response
 		  var resp = req.responseText.replace(/\\"/g, '"');
                   resp = resp.replace(/"{/g, "{");
                   resp = resp.replace(/}"/g, "}");
+ 
                   
                   var valores = JSON.parse(resp);
-                  self.gaugeValue1(valores.velocidad1);
-	          self.sparkValues1.push(valores.velocidad1);
-                  self.gaugeValue2(valores.velocidad2);
-	          self.sparkValues2.push(valores.velocidad2);
-                  self.gaugeValue3(valores.velocidad3);
-	          self.sparkValues3.push(valores.velocidad3);
-                  self.gaugeValue4(valores.velocidad4);
-	          self.sparkValues4.push(valores.velocidad4);           	}
+                  self.gaugeValue1(valores.skull);
+                  
+	          self.sparkValues1.push(valores.skull);
+                  self.gaugeValue2(valores.ground_shock);
+	          self.sparkValues2.push(valores.ground_shock);
+                  self.gaugeValue3(valores.guardian);
+	          self.sparkValues3.push(valores.guardian);
+                  self.gaugeValue4(valores.thermo);
+	          self.sparkValues4.push(valores.thermo);           	}
                
                
                function checkIndicadores() {
-                    self.gaugeValue1(self.gaugeValue1() - 5);
-		    self.sparkValues1.push(self.gaugeValue1());
-		    self.gaugeValue2(self.gaugeValue2() - 5);
-		    self.sparkValues2.push(self.gaugeValue2());
-		    self.gaugeValue3(self.gaugeValue3() - 5);
-		    self.sparkValues3.push(self.gaugeValue3());
-		    self.gaugeValue4(self.gaugeValue4() - 5);
-		    self.sparkValues4.push(self.gaugeValue4());
-		//    req.open("GET", 'http://localhost:4000/carreras/actual', true);
-                //    req.overrideMimeType("application/json");
-		//    req.send();	                                             
+                  //  self.gaugeValue1(self.gaugeValue1() - 5);
+		  //  self.sparkValues1.push(self.gaugeValue1());
+		  //  self.gaugeValue2(self.gaugeValue2() - 5);
+		  //  self.sparkValues2.push(self.gaugeValue2());
+		  //  self.gaugeValue3(self.gaugeValue3() - 5);
+		  //  self.sparkValues3.push(self.gaugeValue3());
+		  //  self.gaugeValue4(self.gaugeValue4() - 5);
+		  //  self.sparkValues4.push(self.gaugeValue4());
+		    req.open("GET", 'http://localhost:3000/autos', true);
+                    req.overrideMimeType("application/json");
+		    req.send();	                                             
                     
                }
 
