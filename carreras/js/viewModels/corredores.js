@@ -18,14 +18,14 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                 self.data = ko.observableArray();
 		
 		
-                data.fetchData('js/data/employees.json').then(function (people) {
-		//data.fetchData('http://localhost:4000/carreras/corredores').then(function (people) {
-                    self.allPeople(people.employees);
+                //data.fetchData('js/data/employees.json').then(function (people) {
+		data.fetchData('http://localhost:4000/carreras/corredores').then(function (people) {
+                  self.allPeople(people);
                 }).fail(function (error) {
                     console.log('Error in getting People data: ' + error.message);
                 });
                 
-	            self.parsePeople = function (response) {
+	         self.parsePeople = function (response) {
                     return response['employees'];
                 };
 
@@ -51,7 +51,7 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                             ko.utils.arrayFilter(self.allPeople(),
                                     function (r) {
                                         var token = self.nameSearch().toLowerCase();
-                                        if (r.firstName.toLowerCase().indexOf(token) === 0 || r.lastName.toLowerCase().indexOf(token) === 0) {
+                                        if (r.nombre.toLowerCase().indexOf(token) === 0 || r.apellido.toLowerCase().indexOf(token) === 0) {
                                             peopleFilter.push(r);
                                         }
                                     });
@@ -63,7 +63,7 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                 });
 
                 self.listViewDataSource = ko.computed(function () {
-                    return new oj.ArrayTableDataSource(self.filteredAllPeople(), {idAttribute: 'empId'});
+                    return new oj.ArrayTableDataSource(self.filteredAllPeople(), {idAttribute: 'id'});
                 });
 
                 self.cardViewPagingDataSource = ko.computed(function () {
@@ -100,9 +100,7 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                     alert('This will take you to the employee page and highlight the team infotile');
                 };
 
-                self.getCantCarreras = function (emp) {
-                    return emp.cantCarreras;
-                };
+                
 
                 self.cardLayoutHandler = function () {
                     utils.createCookie('peopleLayout', 'peopleCardLayout');
@@ -115,9 +113,9 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                 };
 
                 self.loadPersonPage = function (emp) {
-                    if (emp.empId) {
-                        // Temporary code until go('person/' + emp.empId); is checked in 1.1.2
-                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.empId);
+                    if (emp.id) {
+                        // Temporary code until go('person/' + emp.id); is checked in 1.1.2
+                        history.pushState(null, '', 'index.html?root=person&emp=' + emp.id);
                         oj.Router.sync();
                     } else {
                         // Default id for person is 100 so no need to specify.
@@ -128,7 +126,7 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                 self.onEnter = function(data, event){
                     if(event.keyCode === 13){
                         var emp = {};
-                        emp.empId = data.empId;
+                        emp.id = data.id;
                         self.loadPersonPage(emp);
                     }
                     return true;
@@ -138,7 +136,7 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                     if (event.option === 'selection') {
                         if (event.value[0]) {
                             var emp = {};
-                            emp.empId = event.value[0];
+                            emp.id = event.value[0];
                             self.loadPersonPage(emp);
                         }
                     }

@@ -78,6 +78,7 @@ require(['ojs/ojcore',
                 'dashboard': {label: 'Dashboard', isDefault: true},
                 'corredores': {label: 'Corredores'},
                 'carreras' : {label: 'Carreras'},
+                'iniciar' : {label: 'Iniciar'},
                 'carreraActual' : {label: 'Carrera Actual'},                                  
                 'planificacion' : {label: 'Planificacion'},                                  
                 'redessociales' : {label: 'Redes Sociales'}

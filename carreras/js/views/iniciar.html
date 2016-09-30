@@ -1,0 +1,110 @@
+<div id="form-container" class="oj-form-layout">
+  <div id="pageTitleContainer" class="oj-flex-items">
+                    <h1>Iniciar nueva Carrera</h1>
+        </div> 
+  <div class="oj-form">
+  <div class="oj-flex">
+	  
+      <div class="oj-flex-item">
+         <div class="oj-form-control-group" aria-labelledby="inputgrouplabel" role="group">
+          <input aria-label="Nombre de la carrera" 
+                 data-bind="ojComponent: {component: 'ojInputText', value: nombre}">
+          <input aria-label="Lugar de la carrera"
+                 data-bind="ojComponent: {component: 'ojInputText', value: lugar}">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+<table><tr><td>
+<div class="oj-panel oj-panel-alt1" style="height: 120px; width: 500px;margin: 5px 0px 10px 0px;">
+ <table><tr><td>
+  <div class="oj-sm-4">
+  <img class="demo-circular demo-employee-photo" alt="Skull" src="css/images/cars/skull-car.jpg"/>                       </div>
+      </td>
+      <td style="width: 400px">
+        <div class="oj-sm-8">
+          <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Corredor de Skull</h2>                               
+          <div class="demo-employee-title">        
+             <input id="corredor1"
+                    data-bind="ojComponent: {
+                    component: 'ojCombobox',
+	            options: opciones,
+                    value: corredor1,
+                    rootAttributes: {style:'max-width:20em'}}"/>
+           </div>
+        </div>
+   </div>
+ </td></tr></table>
+</div>
+</td><td>
+<div class="oj-panel oj-panel-alt1" style="height: 120px; width: 500px;margin: 5px 0px 10px 0px;">
+ <table><tr><td>
+  <div class="oj-sm-4">
+  <img class="demo-circular demo-employee-photo" alt="Ground Shock" src="css/images/cars/groundshock-car.jpg"/>                       </div>
+      </td>
+      <td style="width: 400px">
+        <div class="oj-sm-8">
+          <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Corredor de Ground Shock</h2>                               
+          <div class="demo-employee-title">        
+             <input id="corredor2"
+                    data-bind="ojComponent: {
+                    component: 'ojCombobox',
+	            options: opciones,
+		    value: corredor2,
+                    rootAttributes: {style:'max-width:20em'}}"/>
+           </div>
+        </div>
+   </div>
+ </td></tr></table>
+</div>
+</td></tr>
+<tr><td>
+<div class="oj-panel oj-panel-alt1" style="height: 120px; width: 500px;margin: 5px 0px 10px 0px;">
+ <table><tr><td>
+  <div class="oj-sm-4">
+  <img class="demo-circular demo-employee-photo" alt="Guardian" src="css/images/cars/guardian-car.jpg"/>                       </div>
+      </td>
+      <td style="width: 400px">
+        <div class="oj-sm-8">
+          <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Corredor de Guardian</h2>                               
+          <div class="demo-employee-title">        
+             <input id="corredor3"
+                    data-bind="ojComponent: {
+                    component: 'ojCombobox',
+	            options: opciones,
+                    value: corredor3,
+                    rootAttributes: {style:'max-width:20em'}}"/>
+           </div>
+        </div>
+   </div>
+ </td></tr></table>
+</div>
+</td><td>
+<div class="oj-panel oj-panel-alt1" style="height: 120px; width: 500px;margin: 5px 0px 10px 0px;">
+ <table><tr><td>
+  <div class="oj-sm-4">
+  <img class="demo-circular demo-employee-photo" alt="Thermo" src="css/images/cars/thermo-car.jpg"/>                       </div>
+      </td>
+      <td style="width: 400px">
+        <div class="oj-sm-8">
+          <h2 class="demo-employee-name" aria-label="employee name" tabindex="0">Corredor de Thermo</h2>                               
+          <div class="demo-employee-title">        
+             <input id="corredor4"
+                    data-bind="ojComponent: {
+                    component: 'ojCombobox',
+	            options: opciones,
+                    value: corredor4,
+                    rootAttributes: {style:'max-width:20em'}}"/>
+           </div>
+        </div>
+   </div>
+ </td></tr></table>
+</div>
+</td></tr></table>
+<button id= "button"
+            data-bind="click: iniciar, 
+                       ojComponent: { component: 'ojButton', label: 'Confirmar Inicio' }">
+</button>
+
+</div>
