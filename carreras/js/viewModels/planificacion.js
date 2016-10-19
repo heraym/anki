@@ -5,7 +5,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojtimeline'],
     {	
      var self = this;	  
       self.series = ko.observableArray([]);
-      self.series = [{"id":"e1","title":"Oracle Application Express","start": "Jan 13, 2010","description":"Jan 13, 2010"},  {"id":"e2","title":"Larry Ellison on the Sun-Oracle Close","start": "Jan 27, 2010","description":"Jan 27, 2010"}];     
+      self.series = [{"id":"e1","title":"Digital Transformation Summit","start": "Oct 18, 2016","description":"Oct 18, 2016"},  {"id":"e2","title":"Visita al Centro de Innovacion","start": "Oct 23, 2016","description":"Oct 23, 2016"}];     
      
     };    
    return PlanificacionViewModel;

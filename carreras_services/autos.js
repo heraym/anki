@@ -6,6 +6,12 @@ var express = require("express"),
     ground_shock = 0;
     thermo = 0;
     guardian = 0;
+    skull_laptime = 0;
+    ground_shock_laptime = 0;
+    thermo_laptime = 0;
+    guardian_laptime = 0;
+    since = 0; // arranca en inicio de carrera
+
 
 app.use(cors());
 
@@ -44,7 +50,7 @@ var optionsAuto = {
    // host : 'www-proxy.us.oracle.com', // here only the domain name
     host : 'ankiot.opcau.com',
     port : 7101,
-    path : 'http://ankiot.opcau.com:7101/iot/api/v1/messages?type=DATA&limit=5', // the rest of the url with parameters if needed
+    path : 'http://ankiot.opcau.com:7101/iot/api/v1/messages?type=DATA&since=' + since, // the rest of the url with parameters if needed
     method : 'GET', // do GET
     auth: 'iot:welcome1',
     headers: {
@@ -69,6 +75,7 @@ var reqAuto = http.request(optionsAuto, function(resAuto) {
      
      for (i =0; i < datosAuto.length; i++) {
        dispId = datosAuto[i].source;
+       //speed
        if (datosAuto[i].payload.format == "urn:oracle:iot:device:data:anki:car:speed") {
 	   if (datosAuto[i].payload.data.carName=="Skull")
                 {  if (lskull) {
@@ -91,7 +98,25 @@ var reqAuto = http.request(optionsAuto, function(resAuto) {
                   lguardian = false;}
                 }   
        }  
-     
+     // lap
+    if (datosAuto[i].payload.format == "urn:oracle:iot:device:data:anki:car:lap") {
+	   if (datosAuto[i].payload.data.carName=="Skull") {   
+               skull_laptime = datosAuto[i].payload.data.laptime;
+            }   
+	   if (datosAuto[i].payload.data.carName=="Ground Shock") { 
+               ground_shock_laptime = datosAuto[i].payload.data.laptime;
+            }
+           if (datosAuto[i].payload.data.carName=="Thermo") {
+               thermo_laptime = datosAuto[i].payload.data.laptime;
+            }   
+           if (datosAuto[i].payload.data.carName=="Guardian") {
+               guardian = datosAuto[i].payload.data.laptime; 
+            }   
+       }       
+     // since
+       if (datosAuto[i].receivedTime > since) {
+           since =  datosAuto[i].receivedTime;
+       }
      }           
     });
     resAuto.on('error', function(e) {

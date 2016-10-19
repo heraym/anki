@@ -1,121 +1,21 @@
-<div class="demo-grid-sizes demo-flex-display">
-  <div class="oj-flex oj-flex-items-pad">
-    <div class="oj-sm-4 oj-md-6 oj-flex-item">
-       <div class="oj-row">
-        <div id="carrList">
-           <table id="table" 
-                   data-bind="ojComponent: {component: 'ojTable', 'beforecurrentrow' : onchange,
-                   data: datasource, 
-                   columns: [
-                             {headerText: 'Id', field: 'id', sortable: 'enabled'},
-                             {headerText: 'Nombre', field: 'nombre', sortable: 'enabled'},
-                             {headerText: 'Fecha', field: 'fecha'}],
-                  selectionMode: {row: 'multiple', column:'multiple'}}">
-            </table>   
-        </div>
-       </div> 
-    </div> 
-    <div id="detalle" class="oj-flex-item" data-bind="style: {visibility: detalleVisible}">
-            <div class="oj-flex-items" data-bind="event:{keypress:$parent.onEnter}">
-                <div class="oj-panel oj-panel-alt1" style="height: 170px; margin: 5px 0px 10px 0px;" data-bind="click: $parent.loadPersonPage">
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <img alt="Imagen Empleado" class="demo-circular demo-employee-photo" id="foto1" data-bind="attr: {src: getFoto1()}"/>
-                            </div>
-                            <div class="oj-flex-items oj-sm-8">
-                            <h2 id="nombre1" class="demo-employee-name"  data-bind="text: corredor1_nombre" tabindex="0"></h2>
-                                <div id="titulo1" class="demo-employee-title" data-bind="text: corredor1_titulo"></div>
-                                <div id="empresa1" class="demo-employee-dept" data-bind="text: corredor1_empresa"></div>
-                            </div>
-                        </div>
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="tiempo1" class="demo-employee-tenure" data-bind="text: corredor1_tiempo"></div>
-                                <div class="demo-employee-tenure-label">Tiempo</div>
-                            </div>
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="puesto1" class="demo-employee-perf" data-bind="text:corredor1_puesto, style: {color:'#309fdb'}"></div>
-                                <div class="demo-employee-perf-label">Puesto</div>
-                            </div>
-                        
-                        </div>
-		</div>
-                <div class="oj-panel oj-panel-alt1" style="height: 170px; margin: 5px 0px 10px 0px;" data-bind="click: $parent.loadPersonPage">
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <img alt="Imagen Empleado" class="demo-circular demo-employee-photo" id="foto2" data-bind="attr: {src: getFoto2()}"/>
-                            </div>
-                            <div class="oj-flex-items oj-sm-8">
-                            <h2 id="nombre2" class="demo-employee-name"  data-bind="text: corredor2_nombre" tabindex="0"></h2>
-                                <div id="titulo2" class="demo-employee-title" data-bind="text: corredor2_titulo"></div>
-                                <div id="empresa2" class="demo-employee-dept" data-bind="text: corredor2_empresa"></div>
-                            </div>
-                        </div>
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="tiempo2" class="demo-employee-tenure" data-bind="text: corredor2_tiempo"></div>
-                                <div class="demo-employee-tenure-label">Tiempo</div>
-                            </div>
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="puesto2" class="demo-employee-perf" data-bind="text:corredor2_puesto, style: {color:'#309fdb'}"></div>
-                                <div class="demo-employee-perf-label">Puesto</div>
-                            </div>
-                        
-                        </div>
-		</div>
+<div>
+<h2>Carreras </h2>
+<ul id="listview" aria-label="list using array" 
+       data-bind="ojComponent: {component: 'ojListView', data: dataSource, item: {template: 'server_template'}, selectionMode: 'single'}">
+</ul>
 
-                <div class="oj-panel oj-panel-alt1" style="height: 170px; margin: 5px 0px 10px 0px;" data-bind="click: $parent.loadPersonPage">
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <img alt="Imagen Empleado" class="demo-circular demo-employee-photo" id="foto3" data-bind="attr: {src: getFoto3()}"/>
-                            </div>
-                            <div class="oj-flex-items oj-sm-8">
-                            <h2 id="nombre3" class="demo-employee-name"  data-bind="text: corredor3_nombre" tabindex="0"></h2>
-                                <div id="titulo3" class="demo-employee-title" data-bind="text: corredor3_titulo"></div>
-                                <div id="empresa3" class="demo-employee-dept" data-bind="text: corredor3_empresa"></div>
-                            </div>
-                        </div>
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="tiempo3" class="demo-employee-tenure" data-bind="text: corredor3_tiempo"></div>
-                                <div class="demo-employee-tenure-label">Tiempo</div>
-                            </div>
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="puesto3" class="demo-employee-perf" data-bind="text:corredor3_puesto, style: {color:'#309fdb'}"></div>
-                                <div class="demo-employee-perf-label">Puesto</div>
-                            </div>
-                        
-                        </div>
-		</div>
-                <div class="oj-panel oj-panel-alt1" style="height: 170px; margin: 5px 0px 10px 0px;" data-bind="click: $parent.loadPersonPage">
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <img alt="Imagen Empleado" class="demo-circular demo-employee-photo" id="foto4" data-bind="attr: {src: getFoto4()}"/>
-                            </div>
-                            <div class="oj-flex-items oj-sm-8">
-                            <h2 id="nombre4" class="demo-employee-name"  data-bind="text: corredor4_nombre" tabindex="0"></h2>
-                                <div id="titulo4" class="demo-employee-title" data-bind="text: corredor4_titulo"></div>
-                                <div id="empresa4" class="demo-employee-dept" data-bind="text: corredor4_empresa"></div>
-                            </div>
-                        </div>
-                        <div class="oj-flex oj-flex-items-pad">
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="tiempo4" class="demo-employee-tenure" data-bind="text: corredor4_tiempo"></div>
-                                <div class="demo-employee-tenure-label">Tiempo</div>
-                            </div>
-                            <div class="oj-flex-items oj-sm-4">
-                                <div id="puesto4" class="demo-employee-perf" data-bind="text:corredor4_puesto, style: {color:'#309fdb'}"></div>
-                                <div class="demo-employee-perf-label">Puesto</div>
-                            </div>
-                        
-                        </div>
-		</div>
-  
+<script type="text/html" id="server_template">
+    <li data-bind="attr: {id: $data['id']}">
+        <div class="oj-flex">
+            <div class="oj-lg-10 oj-md-10 oj-sm-12">
+                <div class="oj-flex row">
+                    <div class="oj-lg-12">
+                        <span class="header" data-bind="text: 'Carrera ' + nombre"></span>
+                    </div>
+                </div>
             </div>
-   <!-- /ko -->
-
-   </div>
-
- 
-
-            
+        </div>
+    </li>
+</script>
+</div>
+    

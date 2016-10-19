@@ -61,19 +61,24 @@
                                 <img alt="employee image" class="demo-circular demo-employee-photo" data-bind="attr: {src: $parent.getPhoto($data['apellido'], $data['nombre'])}"/>
                             </div>
                             <div class="oj-flex-items oj-sm-8">
-                            <h2 class="demo-employee-name" aria-label="Empresa" data-bind="text: $data['empresa']" tabindex="0"></h2>
+                            <h2 class="demo-employee-name" aria-label="employee name" data-bind="text: $data['nombre'] + ' ' + $data['apellido']" tabindex="0"></h2>
                                 <div class="demo-employee-title" data-bind="text: $data['puesto']"></div>
-                                <div class="demo-employee-dept" data-bind="text: $data['email']"></div>
-                                
+                                <div class="demo-employee-dept" data-bind="text: $data['empresa']"></div>
                             </div>
                         </div>
                         <div class="oj-flex oj-flex-items-pad">
                             <div class="oj-flex-items oj-sm-4">
-                                </div>
-				<div class="demo-employee-tenure" data-bind="text:$data['nombre'] + ' ' + $data['apellido']">
-                                <div class="demo-employee-tenure-label">Email</div>
+                                <div class="demo-employee-tenure" data-bind="text: $data['cantcarreras']"></div>
+                                <div class="demo-employee-tenure-label"># Carreras</div>
                             </div>
-                            
+                            <div class="oj-flex-items oj-sm-4">
+                                <div class="demo-employee-perf" data-bind="text:$data['cantganadas'], style: {color: $data['rating'] < 3 ? '#e95b54' : '#309fdb'}"></div>
+                                <div class="demo-employee-perf-label">Ganadas</div>
+                            </div>
+                            <div class="oj-flex-items oj-sm-4">
+                                <div class="demo-employee-perf" data-bind="text:$data['tiempo'], style: {color: $data['potential'] < 3 ? '#e95b54' : '#309fdb'}"></div>
+                                <div class="demo-employee-perf-label">Mejor Tiempo</div>
+                            </div>
                         </div>
                         <div class="oj-flex oj-flex-items-pad" style="float: right;">
                             <a tabindex="0" data-bind="attr:{href: function(data, event){$parent.getEmail(data)}" title="email employee" class="demo-employee-email-icon"></a>
@@ -111,7 +116,7 @@
             <div>
                 <div class="oj-flex oj-flex-items-pad">
                     <div class="oj-flex-items oj-lg-4 oj-md-4">
-                        <img alt="employee image" class="demo-circular demo-employee-photo" style="float:left;" data-bind="attr: {src: $parent.getPhoto($data['apellido'], $data['nombre'])}"/>
+                        <img alt="employee image" class="demo-circular demo-employee-photo" style="float:left;" data-bind="attr: {src: $parent.getPhoto($data['id'])}"/>
                         <h2 class="demo-employee-name" data-bind="text: $data['nombre'] + ' ' + $data['apellido']"></h2>
                         <div class="demo-employee-title" data-bind="text: $data['puesto']"></div>
                         <div class="demo-employee-dept" data-bind="text: $data['empresa']"></div>
@@ -121,7 +126,20 @@
                         <a data-bind="attr:{href: function(data, event){$parent.getChat(data)}" title="IM employee" class="employee-chat-24icon"></a>
                         <a data-bind="attr:{href: function(data, event){$parent.getEmail(data)}" title="Email employee" class="employee-email-24icon"></a>
                     </div>
-                    
+                    <div class="oj-flex-items oj-lg-5 oj-md-4">
+                        <div class="oj-flex-items oj-sm-only-hide oj-md-4 oj-md-float-end">
+                            <div class="demo-employee-comp-ratio" data-bind="text:$data['cantcarreras'], style: {color: $data['compRatio'] < 86 ? '#e95b54' : '#309fdb'}"></div>
+                            <div class="demo-employee-comp-ratio-label"># Carreras</div>
+                        </div>
+                        <div class="oj-flex-items oj-sm-only-hide oj-md-4 oj-md-float-end">
+                            <div class="demo-employee-perf" data-bind="text:$data['cantganadas'], style: {color: $data['potential'] < 3 ? '#e95b54' : '#309fdb'}"></div>
+                            <div class="demo-employee-perf-label"># Ganadas</div>
+                        </div>
+                        <div class="oj-flex-items oj-sm-only-hide oj-md-4 oj-md-float-end">
+                            <div class="demo-employee-tenure" data-bind="text: $data['tiempo']"></div>
+                            <div class="demo-employee-tenure-label">Tiempo</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </li>

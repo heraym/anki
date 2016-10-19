@@ -74,10 +74,10 @@ define(['jquery', 'ojs/ojcore', 'knockout', 'utils', 'data/data', 'ojs/ojrouter'
                     return self.cardViewPagingDataSource().getWindowObservable();
                 });
 
-                self.getPhoto = function (empId) {
+                self.getPhoto = function (apellido, nombre) {
                     var src;
-                    if (empId < 188) {
-                        src = 'css/images/people/' + empId + '.png';
+                    if (apellido != '') {
+                        src = 'css/images/people/' + apellido + '_' + nombre + '.png';
                     } else {
                         src = 'css/images/people/nopic.png';
                     }

@@ -2,8 +2,8 @@
  * Copyright (c) 2014, 2016, Oracle and/or its affiliates.
  * The Universal Permissive License (UPL), Version 1.0
  */
-define(['knockout', 'ojs/ojcore', 'data/data', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojchart', 'ojs/ojgauge'],
-        function (ko, oj, data)
+define(['knockout', 'ojs/ojcore',  'jquery', 'data/data', 'ojs/ojknockout', 'ojs/ojmasonrylayout', 'ojs/ojchart', 'ojs/ojgauge'],
+        function (ko,  oj, $, data)
         {
             /* 
              * Your application specific code will go here
@@ -15,14 +15,44 @@ define(['knockout', 'ojs/ojcore', 'data/data', 'ojs/ojknockout', 'ojs/ojmasonryl
                 
                 self.indicadores = ko.observableArray([]);
                 self.indicadores().alertas = 20;
+                self.cant_carreras = ko.observable(100);
+		self.cant_corredores = ko.observable(100);
+		self.cant_empresas = ko.observable(100);
+                self.mejor_corredor = ko.observable({id:0,apellido:"",nombre:"",puesto:"",empresa:"",cantcarreras:0,cantganadas:0,email:"",telefono:"",twitter:"",tiempo:0});
+                self.mejor_imagen = ko.observable("");
+                
+                //window.setInterval(getPhoto, 3000);
 
-               window.setInterval(checkIndicadores, 10000);
-               function checkIndicadores() {
-                  //self.indicadores().alertas = 1;
-                  //document.getElementById('alertas').innerHTML = self.indicadores().alertas;
+                data.fetchData('http://localhost:4000/carreras/corredores/mejor').then(function (corredor) {
+                  self.mejor_corredor(corredor);
+                  self.mejor_imagen('css/images/people/' + corredor.id + '.png');                               
+                       
+                    
+                }).fail(function (error) {
+                    console.log('Error en mejor corredor: ' + error.message);
+                });
+		
+                
 
-               }
+                data.fetchData('http://localhost:4000/carreras/corredores/cantidad').then(function (nro) {
+                  self.cant_corredores(nro); 
+                }).fail(function (error) {
+                    console.log('Error en cantidad corredores: ' + error.message);
+                });
 
+                data.fetchData('http://localhost:4000/carreras/cantidad').then(function (nro) {
+                  self.cant_carreras(nro);
+                }).fail(function (error) {
+                    console.log('Error en cantidad carreras: ' + error.message);
+                });
+		
+                data.fetchData('http://localhost:4000/carreras/empresas/cantidad').then(function (nro) {
+                  self.cant_empresas(nro);
+                }).fail(function (error) {
+                    console.log('Error en cantidad empresas: ' + error.message);
+                });
+
+                
                 self.personProfile = ko.observableArray([]);
                 self.ready = ko.observable(false);
                 self.stackValue = ko.observable('off');
@@ -63,9 +93,10 @@ define(['knockout', 'ojs/ojcore', 'data/data', 'ojs/ojknockout', 'ojs/ojmasonryl
                     console.log('Error: ' + error.message);
                 });
 
-                self.getPhoto = function (id) {
-                    if (self.personProfile().empId < 188) {
-                        var src = 'css/images/people/' + id + '.png';
+                self.getPhoto = function () {
+		                     
+                    if (self.mejor_corredor.id > 0) {
+                        var src = 'css/images/people/' + self.mejor_corredor.id + '.png';
                     } else {
                         src = 'css/images/people/nopic.png';
                     }
@@ -107,7 +138,8 @@ define(['knockout', 'ojs/ojcore', 'data/data', 'ojs/ojknockout', 'ojs/ojmasonryl
 
                 
             }
-
+           
+                
             return DashboardViewModel;
 
         });

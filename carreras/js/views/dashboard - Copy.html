@@ -34,20 +34,27 @@
         <div class="oj-flex oj-sm-justify-content-center oj-md-justify-content-center oj-lg-justify-content-center curquater">estadisticas</div>
     </div>
 
-    <!-- Evento -->
-    <div id="Evento" class="oj-masonrylayout-tile-2x2" tabindex="0" role="link">
-        <img src="css/images/sitio/bannersev100571553-3233241-esa.jpg"/>
-  
+    <!-- Mejor Corredor tile 1x1 -->
+    <div id="AboutMe" class="oj-masonrylayout-tile-1x1" aria-label="Supervisor" tabindex="0" role="link" data-bind="click: function(){history.pushState(null, '', 'index.html?root=person&emp=100'); oj.Router.sync();}, event:{keypress:onEnterLoadProfile}">
+        <h2 class="oj-flex oj-flex-items-pad aboutmetitle">
+            Mejor Corredor
+        </h2>
+        <!-- ko if: ready -->
+        <img class="dash-photo-circular" id="mejor" alt="Mejor Corredor" data-bind="attr: {src: getPhoto(mejor_corredor)}"/>
+        <!-- /ko -->
     </div>
 
-
-
-
-
-<div id="Evento" class="oj-masonrylayout-tile-2x1" tabindex="0" role="link">
-        <a class="opcVideoUrl opcvideo-modal-btn" target="_new" href="https://www.youtube.com/embed/Ba-nSVr62DU?wmode=opaque&amp;autoplay=1" opcvideotitle="Internet of Things" opcvideoid="https://www.youtube.com/embed/Ba-nSVr62DU?wmode=opaque&amp;autoplay=1" opcvideotype="youtube" data-reveal-id="opcmodal-video" data-lbl="ViewVideoDialog" opcvideoobject="youtube" opcvideodescription="&nbsp;"><img src="/css/images/sitio/Oracle_Internet_Of_Things_Cloud_Service.png" height="300" /></a>
-
-  
+    <!-- My Notifications tile 1x1 -->
+    <div id="MyNotifications" class="oj-masonrylayout-tile-1x1">
+        <div class="oj-flex oj-flex-items-pad notifytitle">
+            Incidentes
+        </div>
+        <div class="oj-flex oj-flex-items-pad oj-lg-12 tcrow">
+            <div class="theadcount oj-flex-item"><span class="approveicon"></span><span>Normales</span><label data-bind="text: personProfile().notifyApproved">3</label></div>
+            <div class="tnewhire oj-flex-item"><span class="waitingicon"></span><span>Warning</span><label data-bind="text: personProfile().notifyWaiting">30</label></div>
+            <div class="ttermin oj-flex-item"><span class="rejectedicon"></span><span>Alertas</span><label id="alertas" data-bind="text: indicadores().alertas"></label></div>
+        </div>
+        <div class="oj-flex oj-sm-justify-content-center oj-md-justify-content-center oj-lg-justify-content-center notifynews">Viernes, Mayo 27, 2016</div>
     </div>
 
     <!-- Autos tile 2x1 -->
@@ -65,7 +72,5 @@
         </div>
         
     </div>
-
-    
 
     </script>

@@ -9,6 +9,138 @@ connectStringDB = "localhost/XE";
 
 //  Carreras
 
+
+exports.cantidadEmpresas = function(callback) {
+
+     var conexion; 
+     var corredores = [];
+     
+     oracledb.getConnection(
+      {
+       user          : "carreras",
+       password      : "carreras",
+       connectString : "localhost/XE"
+      },
+     function(err, connection)
+      {
+       if (err) { console.error(err); return; }
+
+       connection.execute(
+      "SELECT distinct empresa "
+    + "FROM corredores ",
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; }
+       
+      var total = result.rows.length;
+     
+      connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      }); 
+       
+       return callback(total);
+      });
+     });
+       
+   } 
+
+
+exports.cantidadCorredores = function(callback) {
+
+     var conexion; 
+     var corredores = [];
+     
+     oracledb.getConnection(
+      {
+       user          : "carreras",
+       password      : "carreras",
+       connectString : "localhost/XE"
+      },
+     function(err, connection)
+      {
+       if (err) { console.error(err); return; }
+
+       connection.execute(
+      "SELECT id, apellido, nombre, puesto, empresa, cantcarreras, cantganadas, email, telefono, twitter, tiempo "
+    + "FROM corredores ",
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; }
+        
+       var total = result.rows.length;
+     
+      connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      }); 
+ 
+       return callback(total);
+      });
+     });
+       
+   } 
+
+exports.mejorCorredor = function(callback) {
+
+     var conexion; 
+      
+     
+     oracledb.getConnection(
+      {
+       user          : "carreras",
+       password      : "carreras",
+       connectString : "localhost/XE"
+      },
+     function(err, connection)
+      {
+       if (err) { console.error(err); return; }
+
+       connection.execute(
+      "SELECT id, apellido, nombre, puesto, empresa, cantcarreras, cantganadas, email, telefono, twitter, tiempo FROM corredores order by tiempo desc",
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; }
+        
+       var corredor = {id:0,apellido:"",nombre:"",puesto:"",empresa:"",cantcarreras:0,cantganadas:0,email:"",telefono:"",twitter:"",tiempo:0};
+   
+         corredor.id = result.rows[0][0];
+         corredor.apellido = result.rows[0][1];
+         corredor.nombre = result.rows[0][2];
+         corredor.puesto = result.rows[0][3];
+         corredor.empresa = result.rows[0][4];
+         corredor.cantcarreras = result.rows[0][5];
+         corredor.cantganadas = result.rows[0][6];
+         corredor.email = result.rows[0][7];
+         corredor.telefono = result.rows[0][8];
+         corredor.twitter = result.rows[0][9];         
+	 corredor.tiempo = result.rows[0][10];
+         
+         
+     
+      connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      }); 
+
+       return callback(corredor);
+      });
+     });
+       
+   } 
+
 exports.obtenerCorredores = function(callback) {
 
      var conexion; 
@@ -48,6 +180,16 @@ exports.obtenerCorredores = function(callback) {
          
          corredores.push(corredor);
        }
+    
+     connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+
        return callback(corredores);
       });
      });
@@ -110,6 +252,44 @@ exports.obtenerCorredores = function(callback) {
        
    } 
 
+exports.cantidadCarreras = function(callback) {
+
+     var conexion; 
+      
+     
+     oracledb.getConnection(
+      {
+       user          : "carreras",
+       password      : "carreras",
+       connectString : "localhost/XE"
+      },
+     function(err, connection)
+      {
+       if (err) { console.error(err); return; }
+
+       connection.execute(
+      "SELECT id, nombre FROM carreras ",
+      function(err, result)
+      {
+        if (err) { console.error(err.message); return; }
+        
+      var total = result.rows.length;
+  
+      connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+
+       return callback(total);
+      });
+     });
+       
+   } 
+
 
 exports.obtenerCarreras = function(callback) {
 
@@ -151,6 +331,15 @@ exports.obtenerCarreras = function(callback) {
          carrera.tiempo = result.rows[i][12];
          carreras.push(carrera);
        }
+     connection.release(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+
        return callback(carreras);
       });
      });

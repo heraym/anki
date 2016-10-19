@@ -1,0 +1,25 @@
+<html><head><link rel="stylesheet" type="text/css" href="upload.css" />
+    </head><body>
+<img src="supercars-hero-desktop_0.jpg"/>
+        
+   
+<div class="form-style-2">
+<div class="form-style-2-heading">Nuevo Corredor</div>
+<form ref='uploadForm' 
+            id='uploadForm' 
+            action='http://192.168.10.2:4000/carreras/corredores/nuevo' 
+            method='post' 
+            encType="multipart/form-data">
+
+<label for="field1"><span>Archivo <span class="required">*</span></span><input type="file" name="sampleFile" /></label>
+<table><tr><td><label for="field2"><span>Apellido <span class="required">*</span></span><input type="text" class="input-field" name="apellido" value="" /></label></td><td>
+<label for="field3"><span>Nombre <span class="required">*</span></span><input type="text" class="input-field" name="nombre" value="" /></label></td></tr>
+<tr><td><label for="field4"><span>Empresa <span class="required">*</span></span><input type="text" class="input-field" name="empresa" value="" /></label></td><td>
+<label for="field5"><span>Puesto <span class="required">*</span></span><input type="text" class="input-field" name="puesto" value="" /></label></td></tr></table>
+<label for="field6"><span>Email <span class="required">*</span></span><input type="text" class="input-field" name="email" value="" /></label>
+
+<label><span>&nbsp;</span><input type="submit" value="Cargar" /></label>
+</form>
+</div>
+ </body>
+</html>

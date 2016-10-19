@@ -15,20 +15,17 @@ var express = require("express"),
     ground_shock_best_laptime = 0;
     thermo_best_laptime = 0;
     guardian_best_laptime = 0;
-     
-
-var fileUpload = require('express-fileupload');
+    since = 1475526650112; // arranca en inicio de carrera
 
 
 carreras = [];
 carreraActual = { nombre: "", lugar: "", corredor1: 0, corredor2: 0, corredor3: 0, corredor4:0, fecha:null};
     
 app.use(cors());
-app.use(fileUpload());
-app.use(express.static('upload'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
+
 
 
 /***********************************************************************************************/
@@ -44,29 +41,6 @@ app.get('/carreras/corredores', function(req,res) {
             
 });
 
-app.get('/carreras/corredores/cantidad', function(req,res) { 
- db.cantidadCorredores(function(nro) {
-        res.writeHead(200, {"Content-Type": "application/json"});          
-        res.end(JSON.stringify(nro));  
- });
-            
-});
-
-app.get('/carreras/empresas/cantidad', function(req,res) { 
- db.cantidadEmpresas(function(nro) {
-        res.writeHead(200, {"Content-Type": "application/json"});          
-        res.end(JSON.stringify(nro));  
- });
-            
-});
-
-app.get('/carreras/corredores/mejor', function(req,res) { 
-        db.mejorCorredor(function(corredor) {
-        res.writeHead(200, {"Content-Type": "application/json"});          
-        res.end(JSON.stringify(corredor));  
- });
-            
-});
 
 /***********************************************************************************************/
 // Nuevo Corredor
@@ -74,28 +48,9 @@ app.get('/carreras/corredores/mejor', function(req,res) {
 
 app.post('/carreras/corredores/nuevo', function(req,res) { 
  console.log('nuevo corredor');
- 
- var sampleFile;
- 
-    if (!req.files) {
-        res.send('No files were uploaded.');
-        return;
-    }
- 
-    archivo = req.body.apellido + "_" + req.body.nombre + ".png";
-    sampleFile = req.files.sampleFile;
-    sampleFile.mv('/apps/nodejs/carreras/css/images/people/' + archivo, function(err) {
-     /*   if (err) {
-            res.status(500).send(err);
-        }
-        else {
-            res.send('File uploaded!');
-        } */
-    });
-// db.nuevoCorredor(req.query.apellido, req.query.nombre, req.query.puesto, req.query.empresa, req.query.email, req.query.telefono, req.query.twitter);
-  db.nuevoCorredor(req.body.apellido, req.body.nombre, req.body.puesto, req.body.empresa, req.body.email, req.body.telefono, req.body.twitter);
- var output = "<html><body><h1>Corredor cargado! </h1></body></html>";
- res.writeHead(200, {"Content-Type": "text/html"}); 
+ db.nuevoCorredor(req.query.apellido, req.query.nombre, req.query.puesto, req.query.empresa, req.query.email, req.query.telefono, req.query.twitter);
+ var output = "{ resultado: 'OK'}";
+ res.writeHead(200, {"Content-Type": "application/json"}); 
  res.end(JSON.stringify(output));  
 });
 
@@ -112,13 +67,6 @@ app.get('/carreras', function(req,res) {
 	});      
     });
 
-app.get('/carreras/cantidad', function(req,res) { 
- db.cantidadCarreras(function(nro) {
-        res.writeHead(200, {"Content-Type": "application/json"});          
-        res.end(JSON.stringify(nro));  
- });
-            
-});
 
 
 /***********************************************************************************************/
@@ -164,13 +112,13 @@ function getAutos() {
 datos1 = "";
 var optionsAuto = {
    // host : 'www-proxy.us.oracle.com', // here only the domain name
-    host : 'raspberrypi.local',
-    port : 9999,
-    path : 'http://raspberrypi.local:9999/carrera', // the rest of the url with parameters if needed
+    host : 'localhost',
+    port : 7101,
+    path : 'http://localhost:7101/iot/api/v1/messages?type=DATA&limit=10&since=' + since, // the rest of the url with parameters if needed
     method : 'GET', // do GET
-    //auth: 'iot:welcome1',
+    auth: 'iot:welcome1',
     headers: {
-       Host: 'raspberrypi.local'
+       Host: 'ankiot.opcau.com'
     }
 };
 
@@ -189,15 +137,71 @@ var reqAuto = http.request(optionsAuto, function(resAuto) {
        console.log(datos1);
        return;} 
 
-       skull = datosAuto.skull_speed;
-       ground_shock = datosAuto.ground_shock_speed;
-       guardian = datosAuto.guardian_speed;
-       thermo = datosAuto.thermo_speed;
+    var lskull = true;
+    var lground_shock = true;
+    var lthermo = true;
+    var lguardian = true;
+     
+     for (i =0; i < datosAuto.length; i++) {
+       dispId = datosAuto[i].source;
        
-       skull_laptime = datosAuto.skull_laptime;
-       if (skull_laptime < skull_best_laptime) {
+      // console.log(datosAuto[i].payload.format + "---" + datosAuto[i].payload.data.carName);
+       //speed
+       if (datosAuto[i].payload.format == "urn:oracle:iot:device:data:anki:car:speed") {
+	   if (datosAuto[i].payload.data.carName=="Skull")
+                {  if (lskull) {
+                  skull = datosAuto[i].payload.data.speed;
+                  lskull = false;}
+                }   
+	    if (datosAuto[i].payload.data.carName=="Ground Shock")
+                {  if (lskull) {
+                  ground_shock = datosAuto[i].payload.data.speed;
+                  lground_shock = false;}
+                }   
+	    if (datosAuto[i].payload.data.carName=="Thermo")
+                {  if (lthermo) {
+                  thermo = datosAuto[i].payload.data.speed;
+                  lthermo = false;}
+                }   
+            if (datosAuto[i].payload.data.carName=="Guardian")
+                {  if (lguardian) {
+                  guardian = datosAuto[i].payload.data.speed;
+                  lguardian = false;}
+                }   
+       }  
+     // lap
+    if (datosAuto[i].payload.format == "urn:oracle:iot:device:data:anki:car:lap") {
+	  console.log("lap:" + datosAuto[i].payload.data.lapTime); 
+          if (datosAuto[i].payload.data.carName=="Skull") {   
+               skull_laptime = datosAuto[i].payload.data.lapTime;
+               if (skull_laptime < skull_best_laptime) {
                 skull_best_laptime = skull_laptime;
-        }
+               }
+            }   
+	   if (datosAuto[i].payload.data.carName=="Ground Shock") { 
+               ground_shock_laptime = datosAuto[i].payload.data.lapTime;
+	       if (ground_shock_laptime < ground_shock_best_laptime) {
+                ground_shock_best_laptime = ground_shock_laptime;
+               }
+            }
+           if (datosAuto[i].payload.data.carName=="Thermo") {
+               thermo_laptime = datosAuto[i].payload.data.lapTime;
+	       if (thermo_laptime < thermo_best_laptime) {
+                thermo_best_laptime = thermo_laptime;
+               }
+            }   
+           if (datosAuto[i].payload.data.carName=="Guardian") {
+               guardian = datosAuto[i].payload.data.lapTime; 
+               if (guardian_laptime < guardian_best_laptime) {
+                guardian_best_laptime = guardian_laptime;
+               }
+            }   
+       }       
+     // since
+       if (datosAuto[i].receivedTime > since) {
+           since =  datosAuto[i].receivedTime + 1;
+       }
+     }           
     });
     resAuto.on('error', function(e) {
         console.info('ERROR:\n');
@@ -222,6 +226,7 @@ reqAuto.end();
 
 app.get('/autos', function(req,res) {
 
+console.log("obtener info autos");
 getAutos();
 
 setTimeout(function() {
